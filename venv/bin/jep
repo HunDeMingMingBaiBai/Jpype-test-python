@@ -1,0 +1,27 @@
+#!/bin/sh
+
+VIRTUAL_ENV=/Users/4paradigm/PycharmProjects/Jpype-test/venv
+export VIRTUAL_ENV
+
+PYTHONHOME="/Users/4paradigm/PycharmProjects/Jpype-test/venv"; export PYTHONHOME
+
+
+
+if test "x$VIRTUAL_ENV" != "x"; then
+  PATH="$VIRTUAL_ENV/bin:$PATH"
+  export PATH
+fi
+
+cp="/Users/4paradigm/PycharmProjects/Jpype-test/venv/lib/python3.8/site-packages/jep/jep-3.9.1.jar"
+if test "x$CLASSPATH" != "x"; then
+    cp="$cp":"$CLASSPATH"
+fi
+
+jni_path="/Users/4paradigm/PycharmProjects/Jpype-test/venv/lib/python3.8/site-packages/jep"
+
+args=$*
+if test "x$args" = "x"; then
+  args="/Users/4paradigm/PycharmProjects/Jpype-test/venv/lib/python3.8/site-packages/jep/console.py"
+fi
+
+exec java -classpath "$cp" -Djava.library.path="$jni_path" jep.Run $args
