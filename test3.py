@@ -1,4 +1,4 @@
-from py4j.java_gateway import JavaGateway
+from py4j.java_gateway import JavaGateway,GatewayParameters
 import time
 import logging
 
@@ -25,7 +25,8 @@ def buildComplexObject():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    gateway = JavaGateway()
+    gatewayParm = GatewayParameters(port=25222)
+    gateway = JavaGateway(gateway_parameters=gatewayParm)
     while True:
         test = gateway.entry_point.getTest()
         for i in range(10):
